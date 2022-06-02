@@ -42,3 +42,12 @@ print(message6[0] + message7[0] + message6[3] + message7[2] + message6[6] + mess
 
 message8=("PyNaTive")
 print(message8[1] + message8[3] + message8[5:8] + message8[0] + message8[2] + message8[4])
+
+#create a string of the first, middle, and last character using a generic method
+word= input('your word is ') #let user pick word
+number= (len(word)) #figure out how long word is
+first= word[0] #first letter of word
+middleNumber= int(number/2) #get the number of the middle letter
+middle= word[middleNumber] #middle letter
+last= word[number-1] #last letter
+print(first + middle + last) #print all three together
