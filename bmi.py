@@ -1,5 +1,5 @@
 #Aria Kutty
-# How to Calculate someone's BMI
+# How to calculate someone's BMI
 
 import os
 os .system('cls')
@@ -11,11 +11,11 @@ b=height*height
 x=a/b 
 print (x) #the BMI in terminal
 
-if (x < 18.5):
+if (x <= 18.5):
     print ("you are underweight")
 
-if (x > 25):
+if (x >= 25):
     print ("you are overweight")
 
-if (x > 18.6 and x < 24.9): #how do you do greater than or equal to? like what happns if they are exactly 18.6
+if (x > 18.5 and x < 25): #how do you do greater than or equal to? like what happns if they are exactly 18.6
     print ("you are healthy")
