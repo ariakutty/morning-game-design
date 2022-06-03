@@ -13,3 +13,13 @@ if num == 0: #if statement
     print("you are even") #if the mod outcome is 0 the number has to be even
 else:
     print("you are odd") #if the mod outcome is 1 the number has to be odd
+if (variable % 3 ==0):
+    print("multiple of three")
+else:
+    print("not multiple of three")
+if (variable % 5 ==0):
+    print("multiple of five")
+else:
+    print("not multiple of five")
+if (variable % 3 ==0 and variable % 5 ==0):
+    print("multiple of both")
