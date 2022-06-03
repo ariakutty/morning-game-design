@@ -51,3 +51,5 @@ middleNumber= int(number/2) #get the number of the middle letter
 middle= word[middleNumber] #middle letter
 last= word[number-1] #last letter
 print(first + middle + last) #print all three together
+
+#arrange string characters such that lowercase letters should come first
