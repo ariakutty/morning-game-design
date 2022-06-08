@@ -17,6 +17,7 @@
 #descision: if new guess is correct, tell user "congrats! you guessed the singer!"
 #descision: if new guess in incorrect, tell user "wrong! try again!"
 #end
+#a function is a section of the program that we call when needed
 
 
 
@@ -26,64 +27,109 @@ import os
 os.system('cls')
 
 for i in range (75): #this is for title screen
-    print("*", end="")
+            print("*", end="")
+print("  ")
+name=input("what is your name? ")
 print("     ")
 print()
-print("hello! welcome to guess the singer!")
-print("rules:")
-print("you will receive a hint about a singer.")
-print("after this, you will have three guesses to figure out who it is!")
+print(name, end=", ")
+print()
+print("hello! welcome to the guessing game!")
+print("you will have five guesses to figure out a specific word")
 print("good luck!")
 print("     ")
 
-thislist= ["ariana grande", "taylor swift", "harry styles", "lorde", "dua lipa", "olivia rodrigo", "billie eilish", "ed sheeran", "katy perry", "doja cat" ]
-word = random.choice(thislist) #this lets the computer choose the magic word
+Game=True 
+def option1():
+    os.system('cls')
+    check = True
+    count = 0
+    list = ["ariana grande", "taylor swift", "harry styles", "lorde", "dua lipa", "olivia rodrigo", "billie eilish", "ed sheeran", "katy perry", "doja cat" ]
+    theword=random.choice(list)
+    while check and count <5:
+        guess=input("please put your guess for singer here: ")
+        if guess.lower() == theword.lower():
+            print("Congrats, You got it")
+            print(" |      |")
+            print("[|      |]")
+            print(" \      /")
+            print("   \  /")
+            print("    ||")
+            print("    --")
+            input("press enter when done")
+    
+            check = False
+        count += 1
+def option2():
+    os.system('cls')
+    check = True
+    count = 0
+    list = ["banana", "pineapple", "apple", "pear", "orange", "mango", "papaya", "blueberry", "kiwi", "strawberry" ]
+    theword=random.choice(list)
+    while check and count <5:
+        guess=input("please put your guess for fruit here: ")
+        if guess.lower() == theword.lower():
+            print("Congrats, You got it")
+            print(" |      |")
+            print("[|      |]")
+            print(" \      /")
+            print("   \  /")
+            print("    ||")
+            print("    --")
+            input("press enter when done")
 
-for i in range (75): 
-    print("*", end="")
-print()
-print("  ")
+            check = False
+        count += 1
+def option3():
+    os.system('cls')
+    check = True
+    count = 0
+    list = ["dog, cat, panda, pig, hippo, penguin, turtle, giraffe, tiger, lion" ]
+    theword=random.choice(list)
+    while check and count <5:
+        guess=input("please put your guess for animal here: ")
+        if guess.lower() == theword.lower():
+            print("Congrats, You got it")
+            print(" |      |")
+            print("[|      |]")
+            print(" \      /")
+            print("   \  /")
+            print("    ||")
+            print("    --")
+            input("press enter when done")
+    
+            check = False
+        count += 1
 
-if word == "ariana grande": #these are the hints dependeing on the selected singer
-    print("hint! she used to be on nickelodeon")
-if word== "taylor swift":
-    print("hint! she is currently re-recording her masters")
-if word== "harry styles":
-    print("hint! he was in one direction")
-if word== "lorde":
-    print("hint! she has an album called melodrama")
-if word== "dua lipa":
-    print("hint! she is known for reviving 'disco pop'")
-if word== "olivia rodrigo":
-    print("hint! she starred in disney's 'high school musical: the musical: the series")
-if word== "billie eilish":
-    print("hint! she once had green hair")
-if word== "ed sheeran":
-    print("hint! he is a ginger")
-if word== "katy perry":
-    print("hint! she entered her superbowl halftime show on a massive lion")
-if word== "doja cat":
-    print("hint! she rose to fame during quarantine when her hit song blew up on tiktok")
+   
+while Game:
+    print("1. guess the singer")
+    print("2. guess the fruit")
+    print("3. guess the animal")
+    
 
+    print() 
+    while True:
+        choice=input("what game would you like to play? 1, 2, or 3?: ")
+        try:
+            choice=int(choice)
+            if choice >0 and choice <4:
+                break
+            else:
+                print("give me 1, 2, or 3 please!")
+        except:
+            print("sorry")
+    
 
-guess = input("input a singer: ") #lets user take the first guess
-if guess==word:
-    print("congrats! you guessed the singer on your first try! here is your trophy!")    #winning screen with trophy
-    print(" |      |")
-    print("[|      |]")
-    print(" \      /")
-    print("   \  /")
-    print("    ||")
-    print("    --")
-else:
-    print("wrong. try again!")
-    guess= input("input a singer: ") #lets user take another guess
-    if guess==word:
-        print("congrats, you guessed the singer!")
-    else:
-        print("wrong. try again!")
-        guess= input("input a singer: ")  #lets user take their last guess
-        if guess==word: 
-            print("congrats! you guessed the singer!")
-        else:
-            print("sorry, you are out of guesses! better luck next time :(") #losing screen
+    os.system('cls')
+    if choice==1: 
+        option1()
+    if choice==2:
+        option2()
+    if choice==3:
+        option3()
+
+    os.system('cls')
+    answer=input("would you like to play again? " )
+    if ('n' or 'N') in answer:
+        Game=False 
