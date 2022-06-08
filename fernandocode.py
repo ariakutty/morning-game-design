@@ -1,9 +1,8 @@
-# Fernando Gupta
+# Aria Kutty
 # create a word guess agme with 10 words
 # pseudocode: provide instructions to user, one hint and the amount of words in the list, get guess. If correct congratulate. if not say you missed. if missed provide another hint. if correct congatulate if inncorect say, man wrong again and then provide third hint, if correct congatulate, if innocorect say you missed again, you are really bad at this, stop providing hits and give user unlimited guesses till correct 
 
 from ctypes.wintypes import WORD
-from ossaudiodev import control_labels
 import random
 import os 
 
@@ -11,11 +10,12 @@ os.system ('cls')
 from time import sleep
 seconds=.5
 
-theWord= " "
-name=input("What is your name? ")
+theWord=""
+
 list1 = ["coral","scallop","sea urchin","oyster","mussel","cockle","clam","geoduck","abelone","ostrea"]
-list2= ["apple", "kiwi"]
-list3= ["CPU", "RAM"]
+list2 = ["apple","kiwi",'Banana']
+list3 = ["CPU","RAM", "ROM"]
+
 Game=True
 cnt=0
 #a function is a section  the prram that we call when we need it
@@ -44,20 +44,19 @@ def hint():
         print("You are horrible at guessing, no more hints, go till you get it right")
     
     print()
-def selectWrd(choice):
-    global theWord 
+def selectWrd(choice):  #is a function with a parameter
+    global theWord
     if choice ==1:
-        theWord= random.choice(list1)
+        theWord= random.choice(list1)    
     if choice ==2:
         theWord= random.choice(list2)
     if choice ==3:
         theWord= random.choice(list3)
-        return 
-name=input("what is your name? ")
-high=0
+    return theWord  
+name=input("What is your name? ")
+high=0 #tfind highest score
 while Game:
-
-    theword=random.choice(list)
+    
     print("|***************************************|")
     print("|         Guessing  Game   !!           |")
     print("|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^|")
@@ -69,7 +68,7 @@ while Game:
     print("|  These animals are big fans of water  |")
     print("|***************************************|")
 # add user name, make it more personal y will need for keeping score
-   
+    
     print(name, end=", ")
     answer=input("Would you like to play? ")
     if 'n' in answer:
@@ -85,30 +84,32 @@ while Game:
                 print("give me 1,2  3")
         except:
             print("sorry")
+    theWord = selectWrd(choice) #call to a function that will return a value
     #call function to select the word from the right list
     os.system('cls')
     check=True
     while check and cnt <5:
-        guess=input("plese put your guess here: ")
+        guess=input("please put your guess here: ")
         print()
-        if guess == theword:
+        if guess == theWord:
             print("Congrats, You got it")
             check=False
         else:
             hint()
         cnt+=1   # cnt= cnt + 1
-        if cnt==5:
-            print("sorry, you did not win.")
+        if cnt ==5:
+            print("Sorry!" )
     score=200-40*cnt
-    if score < high:
+    if score > high:   # find highest sce
         high=score
-    print(name+"your score is"+str(score))
+    print(name+", your score is "+str(score))
+    input("Press enter ")
     os.system('cls')
     print("<><><><><><><><><><><><>")
     answer=input("Do yo want to play again? ")
     if ('n' or 'N') in answer:
         Game=False
         print("Thank you for playing my game" )
-  
-    cnt=0
-print("your highest score is "+str(high))
+    
+    cnt=0 
+print("your highest score is " + str(high))

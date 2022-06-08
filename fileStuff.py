@@ -19,7 +19,7 @@ print(screLine)
 myFile=open("scre.txt", 'w') #open a file to write. if you want to keep the stuff, use 'a'
 myFile.write(screLine)
 myFile.close()
-myFile=open("scre.txt", 'a') #open a file to write. if you want to keep the stuff, use 'a'
+myFile=open("scre.txt", 'a') #open a file to append. if you want to keep the stuff, use 'a'
 myFile.write(screLine)
 myFile.close()
 myFile=open("scre.txt", 'r')# open a file to read
