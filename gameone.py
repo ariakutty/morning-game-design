@@ -22,9 +22,11 @@
 
 
 
+from itertools import count
 import random
 import os 
 os.system('cls')
+count=0
 
 for i in range (75): #this is for title screen
             print("*", end="")
@@ -41,6 +43,7 @@ print("     ")
 
 Game=True 
 def option1():
+    global count
     os.system('cls')
     check = True
     count = 0
@@ -60,11 +63,14 @@ def option1():
     
             check = False
         count += 1
+
+
 def option2():
+    global count
     os.system('cls')
     check = True
     count = 0
-    list = ["banana", "pineapple", "apple", "pear", "orange", "mango", "papaya", "blueberry", "kiwi", "strawberry" ]
+    list = ["banana","pineapple", "apple", "pear", "orange", "mango", "papaya", "blueberry", "kiwi", "strawberry"]
     theword=random.choice(list)
     while check and count <5:
         guess=input("please put your guess for fruit here: ")
@@ -79,12 +85,15 @@ def option2():
             input("press enter when done")
 
             check = False
-        count += 1
+        count += 1   
+
+
 def option3():
+    global count 
     os.system('cls')
     check = True
     count = 0
-    list = ["dog, cat, panda, pig, hippo, penguin, turtle, giraffe, tiger, lion" ]
+    list = ["dog", "cat", "panda", "pig", "hippo", "penguin", "turtle", "giraffe", "tiger", "lion" ]
     theword=random.choice(list)
     while check and count <5:
         guess=input("please put your guess for animal here: ")
@@ -100,6 +109,7 @@ def option3():
     
             check = False
         count += 1
+         
 
    
 while Game:
@@ -119,9 +129,9 @@ while Game:
                 print("give me 1, 2, or 3 please!")
         except:
             print("sorry")
-    
-
+   
     os.system('cls')
+   
     if choice==1: 
         option1()
     if choice==2:
@@ -130,6 +140,22 @@ while Game:
         option3()
 
     os.system('cls')
+
+    score=100-10*count 
+    print(name+", your score is "+str(score))
+    if score > high:   
+        high=score
+    input("Press enter ")
+    os.system('cls')
+    
+    #from here on is a work in progress
+    import os, datetime
+
+    date=datetime.datetime.now() #todays date and time
+    print(date.strftime("%m/%d/%Y"))
+
+    score=str(high)
+    scrLine=str(score)+"\t"+ name + "\t" +date.strftime("%m-%d=%y")
     answer=input("would you like to play again? " )
     if ('n' or 'N') in answer:
         Game=False 
