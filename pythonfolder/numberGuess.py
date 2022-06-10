@@ -6,18 +6,16 @@ import random
 import os, datetime
 date=datetime.datetime.now()
 
-
-
-
 os.system('cls')
         
-
-
 Game=True
 cnt=0
 high=0
+cscore=0
+check=False
 name=input("what is your name? ")
-def Menu(choice): 
+def Menu(choice):
+    global check  
     if choice ==1:
         print("welcome to the instruction page," + name + "!")
         print("there are three levels to choose from")
@@ -27,29 +25,33 @@ def Menu(choice):
         print("you have 5 guesses")
         print("good luck!")
         input("press enter to return to menu") 
+        check=False
     global num
   
-    
     if choice ==2:
         num = random.randint(1,25)+1
+        check=True
     if choice ==3:
         num = random.randint(1,50)+1 
+        check=True
     if choice ==4:
         num = random.randint(1,100)+1
+        check=True
     if choice ==5:
-       File=open("scoreboard.txt",'r') 
-       print()
-       for line in File.readlines(): 
-           print(line)
-           File.close() 
+        File=open("scre.txt",'r') 
+        print()
+        for line in File.readlines(): 
+            print(line)
+            File.close() 
+        check=False
     if choice ==6:
         print("thanks for playing")
         input("press enter to play again") 
-        with open("score.txt",'r+') as f:
+        with open("cscore.txt",'r+') as f:
             f.truncate(0)
+        
 
 high=0
-
 
 while Game:
     print("welcome to the magic number guessing game!")
@@ -66,8 +68,7 @@ while Game:
     choice= input("what option do you want to select? imput number here: ")
     choice=int(choice)
     choice = Menu(choice)
-
-    check=True
+    
     while check and cnt <5:
         guess=input("please put your guess here: ")
         print() 
@@ -96,14 +97,13 @@ while Game:
             print()
             print("sorry! that's the max guesses")            
     cscore=10000-cnt*100
-    input("press enter to return to menu")
-File=open("scores.txt",'a') 
+    input("press enter")
+File=open("cscores.txt",'w') 
 File.write (str(cscore)) 
 File.close()
-with open("scores.txt") as f:
-    score=(sum(int(line)for line in f))
+with open("cscores.txt") as f:
+    score=cscore 
     if score > high:
             high=score  
-File=open("scoreboard.txt",'a')
 File.write(str(score)+"\t"+name+"\t"+ date.strftime("%m/%d/%Y"))
 File.close() 
