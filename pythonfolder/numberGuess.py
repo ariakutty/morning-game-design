@@ -98,7 +98,8 @@ while Game:
             print("sorry! that's the max guesses")            
     cscore=10000-cnt*100
     input("press enter")
-File=open("cscores.txt",'w') 
+    
+File=open("cscores.txt",'a') 
 File.write (str(cscore)) 
 File.close()
 with open("cscores.txt") as f:
