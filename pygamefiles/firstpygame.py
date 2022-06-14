@@ -8,8 +8,8 @@ pygame.init()#initialize the pygame package
 os.system('cls')
 WIDTH=700 #like constant
 HEIGHT=700
-colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255)}
-clr=colors.get("white")
+colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255), "limeGreen":(153,255,51)}
+clr=colors.get("limeGreen")
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
