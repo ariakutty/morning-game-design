@@ -186,7 +186,10 @@ def scoreboard():
 def exit():
     global title
     global Game
-    title=TITLE_FONT.render('goodbye', 1, colors.get('blue'))
+    title = TITLE_FONT.render("bye-bye!", 1, colors.get("blue"))
+    screen.fill(colors.get("pink"))
+    screen.blit(title, (WIDTH/2.5, HEIGHT//2.5))
+    pygame.display.update()
     Game= False         
 
 
