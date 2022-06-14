@@ -23,13 +23,14 @@ screen=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("My First Game")  #change the title of my window
 
 #boxes for menu
-Button_menu=pygame.Rect(274, 125, 125, 40)
-Button_instruct=pygame.Rect(274, 150, 125, 40)
-Button_settings=pygame.Rect(274, 200, 125, 40)
-Button_Game1=pygame.Rect(274, 250, 125, 40)
-Button_Game2=pygame.Rect(274, 300, 125, 40)
-Button_score=pygame.Rect(274, 350, 125, 40)
-Button_exit=pygame.Rect(274, 400, 125, 40)
+Bx=WIDTH//3
+Button_menu=pygame.Rect(Bx, 150, WIDTH//4, 40)
+Button_instruct=pygame.Rect(Bx, 150, WIDTH//4, 40)
+Button_settings=pygame.Rect(Bx, 200, WIDTH//4, 40)
+Button_Game1=pygame.Rect(Bx, 250, WIDTH//4, 40)
+Button_Game2=pygame.Rect(Bx, 300, WIDTH//4, 40)
+Button_score=pygame.Rect(Bx, 350, WIDTH//4, 40)
+Button_exit=pygame.Rect(Bx, 400, WIDTH//4, 40)
 #images
 bg=pygame.image.load('PygameFiles\images\\bgSmaller.jpg')
 char = pygame.image.load('PygameFiles\images\PixelArtTutorial.png')
@@ -38,37 +39,9 @@ char = pygame.transform.scale(char, (50, 50))
 # pygame.display.update()
 # pygame.time.delay(5000)
 
-
-#square Var
-hb=50
-wb=50
-xb=100
-yb=300
-
-charx = xb
-chary = yb
-
-cx=350
-cy=350
-rad=25
-speed=2
-ibox = rad*math.sqrt(2)
-xig = cx-(ibox/2)
-yig = cy-(ibox/2)
-
 #mouse varuables
 mx = 0
 my = 0
-
-square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
-insSquare=pygame.Rect(xig,yig,ibox,ibox)
-squareClr=colors.get("pink")
-#keep running create a lp
-mountainSquare=pygame.Rect(250,320,180,250)
-circleClr=colors.get("blue")
-backgrnd=colors.get("limeGreen")
-run = True
-Game = False
 
 def mainMenu():
     pygame.draw.rect(screen, colors.get('pink'), Button_settings)
@@ -90,10 +63,8 @@ def mainMenu():
     while MENU:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
-                run=False
                 print("You quit")
                 pygame.display.quit()
-                MENU=False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousePos = pygame.mouse.get_pos()
@@ -116,7 +87,7 @@ def Instructions():
   
     screen.fill(colors.get("pink"))
 
-    Button_1 = pygame.Rect(36, 350, 220, 50)
+    Button_1 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
     pygame.draw.rect(screen, colors.get("blue"), Button_1)
   
     myFile = open("PygameFiles\instructions.txt", "r")
@@ -163,11 +134,11 @@ def settings():
     myFile = open("PygameFiles\settings.txt", "r")
     content = myFile.readlines()
 
-    Button_2 = pygame.Rect(25, 350, 200, 50)
+    Button_2 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
     pygame.draw.rect(screen, colors.get("blue"), Button_2)
 
     screen.blit(title, (275,50))
-    screen.blit(text, (30,355))
+    screen.blit(text, (WIDTH//17, 629,))
     pygame.display.update()
 
     while True:
@@ -188,14 +159,13 @@ def scoreboard():
     title=TITLE_FONT.render('Scoreboard', 1, colors.get('blue'))
     text3 = MENU_FONT.render("Return to Menu", 1, colors.get("white"))
 
-
     screen.fill(colors.get('pink'))
-    Button_3 = pygame.Rect(25, 350, 200, 50)
+    Button_3 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
     pygame.draw.rect(screen, colors.get("blue"), Button_3)
     
 
     screen.blit(title, (265,50))
-    screen.blit(text3, (30,355))
+    screen.blit(text3, (WIDTH//17, 629,))
     pygame.display.update()
 
     scoreboard=True
@@ -219,20 +189,37 @@ def exit():
     title=TITLE_FONT.render('goodbye', 1, colors.get('blue'))
     Game= False         
 
-mainMenu()
-Instructions()
-score=0 
-high=0
 
 def Game1():
-    global score 
-    global high
-    score=0
-    global charx
-    global chary
+    #square Var
+    hb=50
+    wb=50
+    xb=100
+    yb=300
+    global score
+    score=0 
+    high=0
+
+    charx = xb
+    chary = yb
+
+    cx=350
+    cy=350
+    rad=25
+    speed=2
+    ibox = rad*math.sqrt(2)
+    xig = cx-(ibox/2)
+    yig = cy-(ibox/2)
+    square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
+    insSquare=pygame.Rect(xig,yig,ibox,ibox)
+    squareClr=colors.get("pink")
+    #keep running create a lp
+    mountainSquare=pygame.Rect(250,320,180,250)
+    circleClr=colors.get("blue")
+    backgrnd=colors.get("limeGreen")
+    run = True
     global mx
     global my
-    global rad
     run=True 
     while run:
         # screen.fill(backgrnd)
@@ -298,6 +285,8 @@ def Game1():
         #pygame.draw.rect(screen, colors.get('white'), mountainSquare,)
         pygame.display.update()
 
+mainMenu()
+Instructions()
 
 def scoreboard():
     print(score)
@@ -311,4 +300,4 @@ def scoreboard():
     File.close() 
 
 
-Game1() 
+
