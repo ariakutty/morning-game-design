@@ -13,11 +13,12 @@ TITLE_FONT = pygame.font.SysFont('comicsans', 40)
 MENU_FONT = pygame.font.SysFont('comicsans', 20)
 
 os.system('cls')
-WIDTH=700 #like constant
-HEIGHT=700
-colors={"white":(255,255,255),"pink":(244,194,194),"blue":(137, 207, 240),"limeGreen":(153,255,51)}
+WIDTH=800 #like constant
+HEIGHT=800
+colors={"white":(255,255,255),"pink":(244,194,194),"blue":(137, 207, 240),"limeGreen":(153,255,51), "grey":(96,96,96), "black":(0,0,0), "red":(255,0,0), "green":(0,255,0),  "pink":(204,0,204), "orange":(255,128,0), "yellow":(255,255,0), "purple":(127,0,255)}
 clr=colors.get("limeGreen")
 message=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit']
+messageSettings=["Background Color","Screen Size","sound on/off"]
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
@@ -44,6 +45,7 @@ mx = 0
 my = 0
 
 def mainMenu():
+    global yMenu 
     pygame.draw.rect(screen, colors.get('pink'), Button_settings)
     Title = TITLE_FONT.render("Circle eats Square Menu", 1, colors.get("blue"))
     screen.fill(colors.get('white'))
@@ -52,13 +54,14 @@ def mainMenu():
     yMenu=150
     
     for item in message:
-        Button_menu=pygame.Rect(274, yMenu, 125, 40)
+        Button_menu=pygame.Rect(Bx, yMenu, WIDTH//3, 40)
         text=MENU_FONT.render(item, 1, colors.get('blue'))
         pygame.draw.rect(screen, colors.get('pink'), Button_menu)
-        screen.blit(text, (280, yMenu))
+        screen.blit(text, (Bx, yMenu))
         pygame.display.update()
         pygame.time.delay(50)
         yMenu += 50
+
     MENU=True
     while MENU:
         for event in pygame.event.get():
@@ -124,13 +127,12 @@ def Instructions():
                 if Button_1.collidepoint((mx, my)):
                     mainMenu() 
 
-
 def settings():
     global content 
-
+    
     title=TITLE_FONT.render('Settings', 1, colors.get('blue'))
     text=MENU_FONT.render('Return to Menu', 1, colors.get('white'))
-
+    textSizing=MENU_FONT.render('double screen size', 1, colors.get('white'))
     screen.fill(colors.get('pink'))
 
     myFile = open("PygameFiles\settings.txt", "r")
@@ -138,15 +140,16 @@ def settings():
 
     Button_2 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
     pygame.draw.rect(screen, colors.get("blue"), Button_2)
-
-    screen.blit(title, (275,50))
+    Button_3= pygame.Rect(Bx, 150, WIDTH//4, 40)
+    pygame.draw.rect(screen, colors.get("blue"), Button_3)
+    screen.blit(title, (WIDTH//3,HEIGHT//10))
     screen.blit(text, (WIDTH//17, 629,))
+    screen.blit(textSizing, (Bx, 150,))
     pygame.display.update()
 
     while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
-                run=False
                 pygame.display.quit()
                 print("You quit")
             if event.type==pygame.MOUSEBUTTONDOWN:
@@ -155,7 +158,11 @@ def settings():
                 my=mousePos[1]
                 if Button_2.collidepoint((mx, my)):
                     mainMenu()
-
+                if Button_3.collidepoint((mx,my)):
+                    WIDTH*2
+                    HEIGHT*2
+      
+                    
 
 def scoreboard():
     title=TITLE_FONT.render('Scoreboard', 1, colors.get('blue'))
@@ -209,7 +216,6 @@ def exit():
     screen.blit(title, (WIDTH/2.5, HEIGHT//2.5))
     pygame.display.update()
     Game= False         
-
 
 def Game1():
     #square Var
@@ -307,9 +313,6 @@ def Game1():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 mainMenu()
-
-        
-
 
 def Game2():
     #square Var
