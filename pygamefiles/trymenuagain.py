@@ -17,6 +17,8 @@ WIDTH=800 #like constant
 HEIGHT=800
 colors={"white":(255,255,255),"pink":(244,194,194),"blue":(137, 207, 240),"limeGreen":(153,255,51), "grey":(96,96,96), "black":(0,0,0), "red":(255,0,0), "green":(0,255,0),  "pink":(204,0,204), "orange":(255,128,0), "yellow":(255,255,0), "purple":(127,0,255)}
 clr=colors.get("limeGreen")
+print(list(colors.values()))
+backgroundcolor=random.choice(list(colors.values()))
 message=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit']
 messageSettings=["Background Color","Screen Size","sound on/off"]
 #create dispay wind with any name y like
@@ -128,22 +130,29 @@ def Instructions():
                     mainMenu() 
 
 def settings():
-    global content 
-    title=TITLE_FONT.render('Settings', 1, colors.get('blue'))
-    text=MENU_FONT.render('Return to Menu', 1, colors.get('white'))
-    textSizing=MENU_FONT.render('shrink screen size', 1, colors.get('white'))
-    screen.fill(colors.get('pink'))
-    myFile = open("PygameFiles\settings.txt", "r")
-    content = myFile.readlines()
-    Button_2 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
-    pygame.draw.rect(screen, colors.get("blue"), Button_2)
-    Button_3= pygame.Rect(Bx, 150, WIDTH//4, 40)
-    pygame.draw.rect(screen, colors.get("blue"), Button_3)
-    screen.blit(title, (WIDTH//3,HEIGHT//10))
-    screen.blit(text, (WIDTH//17, 629,))
-    screen.blit(textSizing, (Bx, 150,))
-    pygame.display.update()
+    global content, screen, WIDTH, HEIGHT 
+    
+
     while True:
+        global backgroundcolor
+        title=TITLE_FONT.render('Settings', 1, colors.get('blue'))
+        text=MENU_FONT.render('Return to Menu', 1, colors.get('white'))
+        textSizing=MENU_FONT.render('shrink screen size', 1, colors.get('white'))
+        textColor=MENU_FONT.render('change colors', 1, colors.get('white'))
+        screen.fill(backgroundcolor)
+        myFile = open("PygameFiles\settings.txt", "r")
+        content = myFile.readlines()
+        Button_2 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
+        pygame.draw.rect(screen, colors.get("blue"), Button_2)
+        Button_3= pygame.Rect(Bx, 150, WIDTH//4, 40)
+        pygame.draw.rect(screen, colors.get("blue"), Button_3)
+        Button_4= pygame.Rect(Bx, 200, WIDTH//4, 40)
+        pygame.draw.rect(screen, colors.get("blue"), Button_4)
+        screen.blit(title, (WIDTH//3,HEIGHT//10))
+        screen.blit(text, (WIDTH//17, 629,))
+        screen.blit(textSizing, (Bx, 150,))
+        screen.blit(textColor, (Bx, 200))
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.display.quit()
@@ -155,13 +164,14 @@ def settings():
                 if Button_2.collidepoint((mx, my)):
                     mainMenu()
                 if Button_3.collidepoint((mx,my)):
-                    WIDTH*= .5
+                    WIDTH*=.5
                     HEIGHT*=.5
-                    screen=pygame.display.set_mode((WIDTH, HEIGHT))
                     pygame.display.update()
-            pygame.display.update()
-            settings()
-      
+                    screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
+                if Button_4.collidepoint((mx,my)):
+                    backgroundcolor=random.choice(colors)
+
+        pygame.display.update()
                     
 
 def scoreboard():
@@ -170,7 +180,7 @@ def scoreboard():
     
     xd = WIDTH//2 - (title.get_width()//2)
 
-    screen.fill(colors.get('pink'))
+    screen.fill(backgroundcolor)
     Button_3 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
     pygame.draw.rect(screen, colors.get("blue"), Button_3)
     
