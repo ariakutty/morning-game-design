@@ -23,7 +23,6 @@ messageSettings=["Background Color","Screen Size","sound on/off"]
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
 
-
 #boxes for menu
 Bx=WIDTH//3
 Button_menu=pygame.Rect(Bx, 150, WIDTH//4, 40)
@@ -47,7 +46,6 @@ my = 0
 
 def mainMenu():
     global yMenu 
-    global screen 
     pygame.draw.rect(screen, colors.get('pink'), Button_settings)
     Title = TITLE_FONT.render("Circle eats Square Menu", 1, colors.get("blue"))
     screen.fill(colors.get('white'))
@@ -131,15 +129,12 @@ def Instructions():
 
 def settings():
     global content 
-    
     title=TITLE_FONT.render('Settings', 1, colors.get('blue'))
     text=MENU_FONT.render('Return to Menu', 1, colors.get('white'))
     textSizing=MENU_FONT.render('shrink screen size', 1, colors.get('white'))
     screen.fill(colors.get('pink'))
-
     myFile = open("PygameFiles\settings.txt", "r")
     content = myFile.readlines()
-
     Button_2 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40) 
     pygame.draw.rect(screen, colors.get("blue"), Button_2)
     Button_3= pygame.Rect(Bx, 150, WIDTH//4, 40)
@@ -148,7 +143,6 @@ def settings():
     screen.blit(text, (WIDTH//17, 629,))
     screen.blit(textSizing, (Bx, 150,))
     pygame.display.update()
-
     while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -166,9 +160,9 @@ def settings():
                     pygame.display.update()
             pygame.display.update()
             settings()
-
-
+      
                     
+
 def scoreboard():
     title=TITLE_FONT.render('Scoreboard', 1, colors.get('blue'))
     text3 = MENU_FONT.render("Return to Menu", 1, colors.get("white"))
@@ -185,6 +179,20 @@ def scoreboard():
     pygame.display.update()
 
     scoreboard=True
+    while scoreboard:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.display.quit()
+                print("You quit")
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                mousePos=pygame.mouse.get_pos()
+                mx=mousePos[0]
+                my=mousePos[1]
+                if Button_3.collidepoint((mx, my)):
+                    mainMenu()
+
+    import os, datetime
+    os.system('cls')
     name= ('player') 
     score=score
     date=datetime.datetime.now() #todays date and time
@@ -193,24 +201,11 @@ def scoreboard():
     screLine=str(score) + "\t"+name+"\t"+date.strftime("%m/%d/%Y")
     print(screLine)
     myFile=open("pygamefiles/cesscore.txt", 'a')
-    myFile.write(screLine)
+    lines=myFile.readlines()
+    print(lines) 
+    for line in myFile.readlines: #if you say readline() singular, it prints everything on seperate lines
+        print(line)
     myFile.close()
-    while scoreboard:
-        for event in pygame.event.get():
-            mainMenu()
-            print("You quit")      
-            if event.type==pygame.MOUSEBUTTONDOWN:
-                mousePos=pygame.mouse.get_pos()
-                mx=mousePos[0]
-                my=mousePos[1]
-                if Button_3.collidepoint((mx, my)):
-                    mainMenu()
-       
-
-
-  
-
-
 
 def exit():
     global title
@@ -293,9 +288,6 @@ def Game1():
 
         if square.colliderect(insSquare):
             score +1 
-            print(score)
-            if score>high:
-                high=score
             print("BOOM")
             rad+=1
             cx=random.randint(rad, WIDTH-rad)
@@ -314,13 +306,12 @@ def Game1():
         #circle(surface, color, center, radius)
         pygame.draw.circle(screen, circleClr, (cx,cy), rad)
         pygame.draw.rect(screen, squareClr, insSquare)
-    print(score)
 
         #pygame.draw.rect(screen, colors.get('white'), mountainSquare,)
-    pygame.display.update()
-    for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            mainMenu()
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                mainMenu()
 
 def Game2():
     #square Var
@@ -423,9 +414,3 @@ def Game2():
 
 mainMenu()
 Instructions()
-
-
-   
-
-
-
