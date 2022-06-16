@@ -155,8 +155,9 @@ def settings():
                 if Button_2.collidepoint((mx, my)):
                     mainMenu()
                 if Button_3.collidepoint((mx,my)):
-                    WIDTH//2
-                    HEIGHT//2
+                    WIDTH*= .5
+                    HEIGHT*=.5
+                    screen=pygame.display.set_mode((WIDTH, HEIGHT))
                     pygame.display.update()
             pygame.display.update()
             settings()

@@ -14,7 +14,7 @@ pygame.init()
 
 TITLE_FONT = pygame.font.SysFont('comicsans', 40)
 MENU_FONT = pygame.font.SysFont('comicsans', 20)
-WINNER_FONT = pygame.font.SysFont('comicsans', 2000)
+WINNER_FONT = pygame.font.SysFont('comicsans', 500)
 
 WIDTH=700 #like constant
 HEIGHT=700
@@ -704,7 +704,7 @@ def gameEnd():
     screen.fill(backgrnd)
     screen.blit(text, (WIDTH//2, HEIGHT//2))
     pygame.display.update()
-    pygame.time.delay(1000)
+    pygame.time.delay(2000)
         
     
 
