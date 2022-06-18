@@ -24,7 +24,7 @@ messageSettings=["Background Color","Screen Size","sound on/off"]
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
-
+clock=pygame.time.Clock()
 #boxes for menu
 Bx=WIDTH//3
 Button_menu=pygame.Rect(Bx, 150, WIDTH//4, 40)
@@ -45,6 +45,48 @@ char = pygame.transform.scale(char, (50, 50))
 #mouse varuables
 mx = 0
 my = 0
+
+def enterName():
+    screen=pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Get Name")
+    screen.fill(backgroundcolor)
+    run=True #to run the while loop
+    user_name=''
+    nameClr=(0,105,105) #for the text of the name
+    boxClr= (200,200,200) #for the text box
+    TITLE_FONT = pygame.font.SysFont('comicsans', WIDTH//20)
+    MENU_FONT = pygame.font.SysFont('comicsans', WIDTH//25)
+    title=TITLE_FONT.render("Enter Name",1,boxClr)
+    screen.blit(title,(200,50)) 
+    input_rect = pygame.Rect((WIDTH//3, HEIGHT//3), (140, 40))
+
+    #make box
+    while run:
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                #Menu(mainTitle,messageMenu)
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print()
+            if event.type == pygame.KEYDOWN:
+                if event.key==pygame.K_RETURN:  
+                    print("hello, "+ user_name)
+                    #run main menu
+                    pygame.quit()
+                    sys.exit()
+                if event.key==pygame.K_BACKSPACE:
+                    user_name=user_name[:-1]
+                else:
+                    user_name+=event.unicode
+            pygame.draw.rect(screen, boxClr, input_rect)
+            
+            text_surface = MENU_FONT.render(user_name, True, nameClr)
+            #use your x,y
+            screen.blit(text_surface,(input_rect.x+5,input_rect.y+5))
+
+            pygame.display.flip()
 
 def mainMenu():
     global yMenu 
@@ -182,7 +224,6 @@ def settings():
 
         pygame.display.update()
                     
-
 def scoreboard():
    screen.fill(backgroundcolor)
    myFile=open("pygamefiles/cesscore.txt", 'r')
@@ -331,6 +372,7 @@ def Game1():
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 mainMenu()
+        clock.tick(60)
 
 def Game2():
     #square Var
@@ -431,5 +473,6 @@ def Game2():
             if event.type==pygame.QUIT:
                 mainMenu()
 
+enterName()
 mainMenu()
 Instructions()
