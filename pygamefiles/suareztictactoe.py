@@ -611,6 +611,7 @@ screen=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Tic Tac Te")  #change the title of my window
 backgrnd=colors.get("pink")
 
+clock= pygame.time.Clock()
 #game Variable
 player=1        #change players 1 and -1
 gameOver=False  #check if game is over
@@ -690,21 +691,57 @@ def checkWinner():
             winner=0
     
 def gameEnd():
-    global Game, xScore, oScore
-    zero_Array()
-    if winner==1: 
+    global Game, oScore, xScore, markers
+    Game = False
+    if winner == 1:
         xScore+=1
-        text="X"
-        text=WINNER_FONT.render(text, 1, xClr)
-    if winner==-1:
+    if winner == -1:
         oScore+=1
-        text="O"
-        text=WINNER_FONT.render(text, 1, cirClr)
-    #create a new window
+    scro = str(oScore)
+    scrx = str(xScore)
+    txtcolor = colors.get("IVORY") #i changed colors
+    textxscore=MENU_FONT.render("X's score is "+scrx, 1, (txtcolor))
+    textoscore=MENU_FONT.render("O's score is "+scro, 1, (txtcolor))
+    textagn=MENU_FONT.render('Want to play again?', 1, (txtcolor))
+    textyes=MENU_FONT.render('Yes', 1, (txtcolor))
+    textno=MENU_FONT.render('No', 1, (txtcolor))
+    aw = WIDTH//2 - (textagn.get_width()//2)
+    yw = WIDTH//2 - (textyes.get_width()//2)
+    nw = WIDTH//2 - (textno.get_width()//2)
+    xw = WIDTH//2 - (textxscore.get_width()//2)
+    ow = WIDTH//2 - (textoscore.get_width()//2)
+    Buttony=pygame.Rect(yw, 4*HEIGHT//6, 35, 25)
+    Button_n=pygame.Rect(nw, 5*HEIGHT//6, 30, 25)
     screen.fill(backgrnd)
-    screen.blit(text, (WIDTH//2, HEIGHT//2))
+    pygame.draw.rect(screen, colors.get('BLUE'), Buttony)
+    pygame.draw.rect(screen, colors.get('BLUE'), Button_n)
+    screen.blit(textxscore, (xw, HEIGHT//6))
+    screen.blit(textoscore, (ow, 2*HEIGHT//6))
+    screen.blit(textno, (nw, 5*HEIGHT//6))
+    screen.blit(textyes, (yw, 4*HEIGHT//6))
+    screen.blit(textagn, (aw, 3*HEIGHT//6))
     pygame.display.update()
-    pygame.time.delay(2000)
+    pygame.time.delay(5000)
+    for event in pygame.event.get():
+        if event.type==pygame.MOUSEBUTTONDOWN:
+            mousePos=pygame.mouse.get_pos()
+            mx=mousePos[0]
+            my=mousePos[1]
+            if Button_n.collidepoint((mx, my)):
+                pygame.event.get()
+                screen.fill(backgrnd)
+                textbye=MENU_FONT.render('Bye!', 1, (txtcolor))
+                screen.blit(textbye, (WIDTH//2, HEIGHT//2))
+                pygame.display.update()
+                pygame.time.delay(2000)
+            if Buttony.collidepoint((mx, my)):
+                markers.clear()
+                markers=[]
+                zero_Array()
+                pygame.display.update()
+                Game = True
+                
+
         
     
 
@@ -731,6 +768,10 @@ while Game:
                 print(winner)
                 if gameOver: 
                     gameEnd()
+                    Game=False 
             
     pygame.display.update() 
-    pygame.time.delay(100)
+    clock.tick(60)
+
+   
+      
