@@ -476,24 +476,11 @@ def Game2():#i need help with getting my tic tac toe to not quit the game
         txtcolor = colors.get("IVORY") #i changed colors
         textxscore=MENU_FONT.render("X's score is "+scrx, 1, (txtcolor))
         textoscore=MENU_FONT.render("O's score is "+scro, 1, (txtcolor))
-        textagn=MENU_FONT.render('would you like to replay?', 1, (txtcolor))
-        textyes=MENU_FONT.render('Yes', 1, ("black"))
-        textno=MENU_FONT.render('No', 1, ("black"))
-        aw = WIDTH//2 - (textagn.get_width()//2)
-        yw = WIDTH//2 - (textyes.get_width()//2)
-        nw = WIDTH//2 - (textno.get_width()//2)
         xw = WIDTH//2 - (textxscore.get_width()//2)
         ow = WIDTH//2 - (textoscore.get_width()//2)
-        ButtonYes=pygame.Rect(yw, 4*HEIGHT//6, 35, 25)
-        ButtonNo=pygame.Rect(nw, 5*HEIGHT//6, 30, 25)
         screen.fill(backgroundcolor)
-        pygame.draw.rect(screen, colors.get('white'), ButtonYes)
-        pygame.draw.rect(screen, colors.get('white'), ButtonNo)
         screen.blit(textxscore, (xw, HEIGHT//6))
         screen.blit(textoscore, (ow, 2*HEIGHT//6))
-        screen.blit(textno, (nw, 5*HEIGHT//6))
-        screen.blit(textyes, (yw, 4*HEIGHT//6))
-        screen.blit(textagn, (aw, 3*HEIGHT//6))
         pygame.display.update()
         pygame.time.delay(5000)
 
@@ -503,15 +490,8 @@ def Game2():#i need help with getting my tic tac toe to not quit the game
                 if event.type == pygame.QUIT:
                     Game = False
                     print("you quit")
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mousePos = pygame.mouse.get_pos()
-                    mx = mousePos[0]
-                    my = mousePos[1]
-                    if ButtonYes.collidepoint(mx, my):
-                        game()
-                    if ButtonNo.collidepoint(mx,my):
-                        Game=False
-                        finalScreen()
+                    mainMenu()
+            
                         
     def finalScreen():
         screen.fill(colors.get("white"))
