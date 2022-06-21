@@ -17,7 +17,7 @@ MENU_FONT = pygame.font.SysFont('comicsans', 20)
 os.system('cls')
 WIDTH=800 #like constant
 HEIGHT=800
-colors={"white":(255,255,255),"pink":(244,194,194),"blue":(137, 207, 240),"limeGreen":(153,255,51), "grey":(96,96,96), "black":(0,0,0), "red":(255,0,0), "green":(0,255,0),  "pink":(204,0,204), "orange":(255,128,0), "yellow":(255,255,0), "purple":(127,0,255)}
+colors={"white":(255,255,255),"pink":(244,194,194),"green": (0,255,0) , "blue":(137, 207, 240),"limeGreen":(153,255,51), "grey":(96,96,96), "black":(0,0,0), "red":(255,0,0), "green":(0,255,0),  "pink":(204,0,204), "orange":(255,128,0), "yellow":(255,255,0), "purple":(127,0,255)}
 clr=colors.get("limeGreen")
 print(list(colors.values()))
 backgroundcolor=random.choice(list(colors.values()))
@@ -238,7 +238,6 @@ def scoreboard(): #why does my scoreboard now have so many errors after i inputt
  
     text3 = MENU_FONT.render("Return to Menu", 1, colors.get("white"))
   
-    xd = WIDTH//2 - (title.get_width()//2)
     Button_3 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40)
     pygame.draw.rect(screen, colors.get("blue"), Button_3)
   
@@ -377,20 +376,17 @@ def Game1():
             if event.type==pygame.QUIT:
                 mainMenu()
         clock.tick(60)
-
+   
+gameOver=False  #check if game is over
 def Game2():#i need help with getting my tic tac toe to not quit the game
 #why does the yes i want to play again button not work in tic tac toe
-        
+    global xScore, oScore, player, markers, gameOver    
     clock= pygame.time.Clock()
     #game Variable
-    global player
-    player=1        #change players 1 and -1
-    gameOver=False  #check if game is over
+    player=1        #change players 1 and, -1
     winner=0       #save winner either 1 or -1 zero means tie
-    global xScore, oScore
     xScore=0
     oScore=0
-    global markers
     markers=[]      #controlcells
     lineWidth=10    #thickness drawing
     Game=True       #control game
