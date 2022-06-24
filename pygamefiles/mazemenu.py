@@ -1,8 +1,7 @@
 #aria kutty
 #this is me trying the circle menu again
 #i need help with getting the scoreboard to run
-#i need help with getting my tic tac toe to not quit the game
-#why does the yes i want to play again button not work in tic tac toe
+#i have the scoreboard code that i attempted in here, but it is commented out and i took out the button for it because it kept crashing whenever i tried to run it. 
 
 import sys
 import pygame, time,os,random, math, datetime 
@@ -22,7 +21,7 @@ colors={"white":(255,255,255),"pink":(244,194,194),"green": (0,255,0) , "blue":(
 clr=colors.get("limeGreen")
 print(list(colors.values()))
 backgroundcolor=random.choice(list(colors.values()))
-message=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Exit']
+message=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Game 3', 'Exit']
 messageSettings=["Background Color","Screen Size","sound on/off"]
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
@@ -35,7 +34,8 @@ Button_instruct=pygame.Rect(Bx, 150, WIDTH//4, 40)
 Button_settings=pygame.Rect(Bx, 200, WIDTH//4, 40)
 Button_Game1=pygame.Rect(Bx, 250, WIDTH//4, 40)
 Button_Game2=pygame.Rect(Bx, 300, WIDTH//4, 40)
-
+Button_Game3=pygame.Rect(Bx, 350, WIDTH//4, 40)
+# Button_score= pygame.rect(Bx, 350, WIDTH//4, 40)
 Button_exit=pygame.Rect(Bx, 400, WIDTH//4, 40)
 #images
 bg=pygame.image.load('PygameFiles\images\\bgSmaller.jpg')
@@ -127,11 +127,57 @@ def mainMenu():
                     Game1()
                 if Button_Game2.collidepoint((mx, my)):
                     Game2()
+                if Button_Game3.collidepoint((mx, my)):
+                    Game3()
                 # if Button_score.collidepoint((mx, my)):
                 #     scoreboard()
                 if Button_exit.collidepoint((mx, my)):
                     exit()
+# def scoreboard(): #why does my scoreboard now have so many errors after i inputted it also it quits the pygame when i run it
+     
+#     screen.fill(backgroundcolor)
+#     global title
+#     global xd
+#     myFile=open("pygamefiles/mazescore.txt", 'r')
+#     score_txt = myFile.readlines()
+#     for i in score_txt:
+#        txt = MENU_FONT.render(i, 1, colors.get('white'))
+#        screen.blit(txt, (0,0))
+ 
+#     text3 = MENU_FONT.render("Return to Menu", 1, colors.get("white"))
+  
+#     Button_3 = pygame.Rect(WIDTH//17, 629, WIDTH//3.5, 40)
+#     pygame.draw.rect(screen, colors.get("blue"), Button_3)
+  
+
+#     screen.blit(text3, (WIDTH//17, 629,))
+#     pygame.display.update()
+ 
+#     scoreboard=True
+#     while scoreboard:
+#         for event in pygame.event.get():
+#             if event.type==pygame.QUIT:
+#                 pygame.display.quit()
+#                 print("You quit")
+#             if event.type==pygame.MOUSEBUTTONDOWN:
+#                 mousePos=pygame.mouse.get_pos()
+#                 mx=mousePos[0]
+#                 my=mousePos[1]
+#                 if Button_3.collidepoint((mx, my)):
+#                     mainMenu()
     
+#     import os, datetime
+#     os.system('cls')
+#     name= ('player')
+    
+#     date=datetime.datetime.now() #todays date and time
+    
+#     screLine=str(score) + "\t"+name+"\t"+date.strftime("%m/%d/%Y")
+    
+#     myFile=open("pygamefiles/mazescore.txt", 'a')
+#     myFile.write(screLine)
+#     myFile.close()
+
 def Instructions():
  
     Title = TITLE_FONT.render("Instructions", 1, colors.get("blue"))
@@ -495,6 +541,159 @@ def Game2():
                 run=False
                 mainMenu()
 
+def Game3():
+    #aria kutty
+    #final game
+    #maze
+    pygame.init()#initialize the pygame package
+    date=datetime.datetime.now() 
+    pygame.init() 
+    WIDTH=700 #like constant
+    HEIGHT=700
+    colors={"white":(255,255,255),"pink":(255,0,255), "green": (50,200,10) , "blue":(0,0,255), "limeGreen":(153,255,51)}
+    #create dispay wind with any name y like
+    screen=pygame.display.set_mode((WIDTH,HEIGHT))  
+
+    #loads in all the images without backgrounds
+    dog=pygame.image.load('pygamefiles\images\\dognobg.png')
+    bg=pygame.image.load('pygamefiles\images\\background.png')
+    dogbone=pygame.image.load('pygamefiles\images\\dogbonenobg.png')
+    youwin=pygame.image.load('pygamefiles\images\\youwin.jpg')
+    coin1=pygame.image.load('pygamefiles\images\\goldcoin.png')
+    slime=pygame.image.load('pygamefiles\images\\slimenobg.png')
+    dogfood=pygame.image.load('pygamefiles\images\\dogfoodnobg.png')
+    score=0
+
+    #creates the walls
+    wall1= pygame.Rect(80, 120, 80, 15)
+    wall2= pygame.Rect(0,50, 15, 700)
+    wall3= pygame.Rect(80, 0, 15, 120)
+    wall4= pygame.Rect(0, 215, 200, 15)
+    wall5= pygame.Rect(80, 120,200, 15)
+    wall6= pygame.Rect(270, 120, 15, 200)
+    wall7= pygame.Rect(180, 224, 15, 200)
+    wall8= pygame.Rect(185, 404, 280, 15)
+    wall9= pygame.Rect(368, 53, 15, 300)
+    wall10= pygame.Rect(370, 333, 200, 15)
+    wall11= pygame.Rect(88, 266, 15, 150)
+    wall12= pygame.Rect(550, 345, 15, 184)
+    wall13= pygame.Rect(351, 509, 200, 15)
+    wall14= pygame.Rect(368, 54, 220, 15)
+    wall15= pygame.Rect(350, 510, 15, 100)
+    wall15= pygame.Rect(680, 54, 15, 560)
+    wall16= pygame.Rect(447, 127, 240, 15)
+    wall17= pygame.Rect(368, 200, 240, 15)
+    wall18= pygame.Rect(447,267 , 240, 15)
+    wall19= pygame.Rect(351, 405 , 15, 110)
+    wall20= pygame.Rect(290, 594 , 435, 15)
+    wall21= pygame.Rect(270, 514 , 15, 100)
+    wall22= pygame.Rect(89, 508 , 201, 15)
+    #makes images the right size
+    dog=pygame.transform.scale(dog, (35,35))
+    dogRect = dog.get_rect()
+    dogbone=pygame.transform.scale(dogbone, (50, 40))
+    boneRect = dogbone.get_rect()
+    coin=pygame.transform.scale(coin1, (40,30))
+    coinRect = coin.get_rect()
+    youwin=pygame.transform.scale(youwin, (700,700))
+    dogfood=pygame.transform.scale(dogfood, (40,40))
+    slime=pygame.transform.scale(slime, (40, 40))
+
+    
+    #list for the walls so its simpler
+    wallList=[wall1, wall2, wall3, wall4,wall5, wall6, wall7, wall8, wall9, wall10, wall11, wall12, wall13, wall14,wall15, wall16, wall17, wall18, wall19, wall20, wall21, wall22]
+    #will go under the main game 1 function
+    #game two will have the same walls set up, but will have powerups throughout the middle
+    while True:
+        mousePos = pygame.mouse.get_pos()
+        mx = mousePos[0]
+        my = mousePos[1]
+        Bx=WIDTH//3
+
+        screen.blit(bg, (0, 0)) 
+
+        screen.blit(coin, (136, 261))
+        
+        screen.blit(dog, dogRect)
+        
+        screen.blit(dogbone, (620, 625))
+
+        screen.blit(slime, (404,453))
+
+        screen.blit(dogfood, (197,556))
+
+        #draws walls
+        pygame.draw.rect(screen, colors.get("green"), wall1)
+        pygame.draw.rect(screen, colors.get("green"), wall2)
+        pygame.draw.rect(screen, colors.get("green"), wall3)
+        pygame.draw.rect(screen, colors.get("green"), wall4)
+        pygame.draw.rect(screen, colors.get("green"), wall5)
+        pygame.draw.rect(screen, colors.get("green"), wall6)
+        pygame.draw.rect(screen, colors.get("green"), wall7)
+        pygame.draw.rect(screen, colors.get("green"), wall8)
+        pygame.draw.rect(screen, colors.get("green"), wall9)
+        pygame.draw.rect(screen, colors.get("green"), wall10)
+        pygame.draw.rect(screen, colors.get("green"), wall11)
+        pygame.draw.rect(screen, colors.get("green"), wall12)
+        pygame.draw.rect(screen, colors.get("green"), wall13)
+        pygame.draw.rect(screen, colors.get("green"), wall14)
+        pygame.draw.rect(screen, colors.get("green"), wall15)
+        pygame.draw.rect(screen, colors.get("green"), wall16)
+        pygame.draw.rect(screen, colors.get("green"), wall17)
+        pygame.draw.rect(screen, colors.get("green"), wall18)
+        pygame.draw.rect(screen, colors.get("green"), wall19)
+        pygame.draw.rect(screen, colors.get("green"), wall20)
+        pygame.draw.rect(screen, colors.get("green"), wall21)
+        pygame.draw.rect(screen, colors.get("green"), wall22)
+        
+        pygame.display.update()
+
+        keyPressed= pygame.key.get_pressed()
+        speed= 4
+        if keyPressed[K_LEFT]: 
+            dogRect.x -= speed
+        elif keyPressed[K_RIGHT]:
+            dogRect.x+= speed
+        elif keyPressed[K_UP]:
+            dogRect.y -= speed
+        elif keyPressed[K_DOWN]:
+            dogRect.y += speed
+        #if the dog collides with the walls then the dog goes back to the start
+        # for walls in wallList:
+        #     if dogRect.colliderect(walls): 
+        #         dogRect.x=30
+        #         dogRect.y=0
+        #if the dog collides with the bone then the score goes up and it displays winner screen
+        if dogRect.collidepoint(620,625):
+            score+=10 
+            print(score)
+            screen.blit(youwin, (0,0))
+            score_text = MENU_FONT.render('Your score is: ' + str(score), True, colors.get('pink'))
+            screen.blit(score_text, (WIDTH//2-50, HEIGHT//2+100))
+            pygame.display.update()
+            pygame.time.delay(3000)
+            mainMenu()
+        #if the dog collides with the coin the score goes up
+        if dogRect.collidepoint(136, 261):
+            dogRect.y+=15
+            coin=pygame.transform.scale(coin1, (1,1))
+            score+=5
+            print(score)
+        #if the dog collides with the slime the score goes down
+        if dogRect.collidepoint(405, 455):
+            dogRect.x+=15
+            slime=pygame.transform.scale(slime, (1,1))
+            score-=2
+            print(score)
+        if dogRect.collidepoint(197,556):
+            dogRect.y+=15
+            dogfood=pygame.transform.scale(dogfood, (1,1))    
+            score+=7
+            print(score)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run=False
+                mainMenu()
 
 def exit():
     global title
