@@ -1,7 +1,7 @@
-these are the instructions for the circle menu
-in this game we need to use
-the arrow keys to move the square
-use W A S D to move the circle
+welcome to the maze game!
+use the arrow keys to move the dog to try to reach the bone
+in level two powerups are included
+have fun, and don't touch the walls!
    
 
 
