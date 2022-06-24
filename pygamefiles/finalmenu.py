@@ -22,7 +22,7 @@ colors={"white":(255,255,255),"pink":(244,194,194),"green": (0,255,0) , "blue":(
 clr=colors.get("limeGreen")
 print(list(colors.values()))
 backgroundcolor=random.choice(list(colors.values()))
-message=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit']
+message=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Exit']
 messageSettings=["Background Color","Screen Size","sound on/off"]
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
@@ -35,7 +35,7 @@ Button_instruct=pygame.Rect(Bx, 150, WIDTH//4, 40)
 Button_settings=pygame.Rect(Bx, 200, WIDTH//4, 40)
 Button_Game1=pygame.Rect(Bx, 250, WIDTH//4, 40)
 Button_Game2=pygame.Rect(Bx, 300, WIDTH//4, 40)
-Button_score=pygame.Rect(Bx, 350, WIDTH//4, 40)
+
 Button_exit=pygame.Rect(Bx, 400, WIDTH//4, 40)
 #images
 bg=pygame.image.load('PygameFiles\images\\bgSmaller.jpg')
@@ -468,10 +468,10 @@ def Game2():
         elif keyPressed[K_DOWN]:
             dogRect.y += speed
 
-        # for walls in wallList:
-        #     if dogRect.colliderect(walls): 
-        #         dogRect.x=30
-        #         dogRect.y=0
+        for walls in wallList:
+            if dogRect.colliderect(walls): 
+                dogRect.x=30
+                dogRect.y=0
 
         if dogRect.collidepoint(620,625):
             score+=10 
